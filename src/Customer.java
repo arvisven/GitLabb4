@@ -15,7 +15,7 @@ public class Customer {
 	
 	public String toString() {	//Funktion som skriver ut informationen om kunden på ett fint sätt.
 		
-		return _name + ", " + _items;
+		return _name + ", Antal varor: " + _items;
 		
 	}
 	
