@@ -13,11 +13,11 @@ public class StorePanel extends JPanel implements ActionListener{
 	JTextField _name;
 	JTextField _items;
 	DefaultListModel<Customer> m1;
-	DefaultListModel<Customer> m2;
-	DefaultListModel<Customer> m3;
 	JList<Customer> _inStoreList;
 	JList<Customer> _line1;
 	JList<Customer> _line2;
+	Queue<Customer> _queue1;
+	Queue<Customer> _queue2;
 	
 	JPanel top_panel;
 	JPanel center_panel;
@@ -53,8 +53,8 @@ public class StorePanel extends JPanel implements ActionListener{
 		
 		
 		m1 = new DefaultListModel<Customer>();
-		m2 = new DefaultListModel<Customer>();
-		m3 = new DefaultListModel<Customer>();
+		_queue1 = new Queue<Customer>();
+		_queue2 = new Queue<Customer>();
 		
 		
 		_inStoreList = new JList<Customer>(m1);
@@ -63,13 +63,13 @@ public class StorePanel extends JPanel implements ActionListener{
 		c.gridy = 0;
 		center_panel.add(_inStoreList, c);
 		
-		_line1 = new JList<Customer>(m2);
+		_line1 = new JList<Customer>(_queue1.getDefaultList());
 		_line1.setPreferredSize(new Dimension(150,250));
 		c.gridx = 1;
 		c.gridy = 0;
 		center_panel.add(_line1, c);
 		
-		_line2 = new JList<Customer>(m3);
+		_line2 = new JList<Customer>(_queue2.getDefaultList());
 		_line2.setPreferredSize(new Dimension(150,250));
 		c.gridx = 2;
 		c.gridy = 0;
@@ -124,7 +124,7 @@ public class StorePanel extends JPanel implements ActionListener{
 		}
 		else if (e.getSource() == _moveToLine1) {
 			
-			m2.addElement(m1.elementAt(0));
+			_queue1.enqueue(m1.elementAt(0));
 			m1.remove(0);
 			_infoText.setText("Kund flyttad till kö 1");
 			
@@ -132,8 +132,9 @@ public class StorePanel extends JPanel implements ActionListener{
 		}
 		else if (e.getSource() == _moveToLine2) {
 			
-			m3.addElement(m1.elementAt(0));
+			_queue2.enqueue(m1.elementAt(0));
 			m1.remove(0);
+			_infoText.setText("Kund flyttad till kö 1");
 			
 		}
 	}
