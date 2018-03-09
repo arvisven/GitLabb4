@@ -20,29 +20,14 @@ public class Queue<Customer> {
 	
 	
 	public Customer dequeue() {
-		
-		if(!isEmpty()) {
-			
-			System.out.println("Tom kö");
-			
-		}
-		
-		_queue.remove(0);
-		return _queue.getElementAt(0);
+				
+		return (Customer) _queue.remove(0);
 		
 	}
 	
 	public boolean isEmpty() {
 		
-		if(_queue == null) {
-			
-			return true;
-			
-		} else {	
-			
-			return false;
-			
-		}
+		return _queue.isEmpty();
 		
 	}
 		
