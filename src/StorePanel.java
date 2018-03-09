@@ -65,7 +65,7 @@ public class StorePanel extends JPanel implements ActionListener{
 		_queue2 = new Queue<Customer>();
 		
 		//Text som visar listan med kunderna i affären.
-		_infoStore = new JLabel("Customers in store");
+		_infoStore = new JLabel("Kunder i affären");
 		c.gridx = 0;
 		c.gridy = 0;
 		center_panel.add(_infoStore, c);
@@ -79,7 +79,7 @@ public class StorePanel extends JPanel implements ActionListener{
 		center_panel.add(_inStoreList, c);
 		
 		//Text som visar första kön
-		_infoLine1 = new JLabel("Customers in Line 1");
+		_infoLine1 = new JLabel("Kunder i kö 1");
 		c.gridx = 1;
 		c.gridy = 0;
 		center_panel.add(_infoLine1, c);
@@ -93,7 +93,7 @@ public class StorePanel extends JPanel implements ActionListener{
 		center_panel.add(_line1, c);
 		
 		//Text som visar vilken som är kö 2
-		_infoLine2 = new JLabel("Customers in Line 2");
+		_infoLine2 = new JLabel("Kunder i kö 2");
 		c.gridx = 2;
 		c.gridy = 0;
 		center_panel.add(_infoLine2, c);
@@ -162,10 +162,18 @@ public class StorePanel extends JPanel implements ActionListener{
 		else if (e.getSource() == _moveToLine1) {
 			
 			if(!m1.isEmpty()) {
-				
-				_queue1.enqueue(m1.elementAt(0));
-				m1.remove(0);
-				_infoText.setText("Kund flyttad till kö 1");
+							
+				if(_inStoreList.getSelectedIndex() >= 0) {
+					
+					_queue1.enqueue(m1.elementAt(_inStoreList.getSelectedIndex()));
+					m1.remove(_inStoreList.getSelectedIndex());
+					_infoText.setText("Kund flyttad till kö 1");
+					
+				} else {
+					
+					_infoText.setText("Du måste markera en kund att flytta");
+					
+				}
 				
 			} else {
 				
@@ -179,9 +187,17 @@ public class StorePanel extends JPanel implements ActionListener{
 			
 			if(!m1.isEmpty()) {
 				
-				_queue2.enqueue(m1.elementAt(0));
-				m1.remove(0);
-				_infoText.setText("Kund flyttad till kö 1");
+				if(_inStoreList.getSelectedIndex() >= 0) {
+				
+					_queue2.enqueue(m1.elementAt(_inStoreList.getSelectedIndex()));
+					m1.remove(_inStoreList.getSelectedIndex());
+					_infoText.setText("Kund flyttad till kö 1");
+				
+				} else {
+					
+					_infoText.setText("Du måste markera en kund att flytta");
+					
+				}
 				
 			} else {
 				
