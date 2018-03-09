@@ -49,7 +49,7 @@ public class StorePanel extends JPanel implements ActionListener{
 		top_panel.add(_name);
 		top_panel.add(_items);
 		top_panel.add(_newCustomer);
-		top_panel.setBackground(java.awt.Color.cyan);
+		top_panel.setBackground(java.awt.Color.red);
 		this.add(top_panel, BorderLayout.NORTH);
 		
 																//Listerna i mitten av programmet
