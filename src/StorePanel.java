@@ -151,11 +151,22 @@ public class StorePanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == _newCustomer){
-			
+			try {
 			String name = _name.getText();
 			int items = Integer.parseInt(_items.getText());
-		    m1.addElement(new Customer(name,items));
-		    _infoText.setText("Kund tillagd");
+		    m1.addElement(new Customer(name,items)); 
+			_infoText.setText("Kund tillagd");
+			}
+		    catch (NumberFormatException ie) {
+		    	
+		    	_infoText.setText("Felaktig inmatning av antal varor.");
+		    
+		    }
+			catch (Exception ye) {
+				
+				_infoText.setText("Inmatning felaktig.");
+				
+			}
 		
 		}
 		
