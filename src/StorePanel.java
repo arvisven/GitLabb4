@@ -148,21 +148,22 @@ public class StorePanel extends JPanel implements ActionListener{
 		
 	}
 	
+	//Händelsehantering
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == _newCustomer){
+		if (e.getSource() == _newCustomer){ //Om knappen "lägg till kund" används går programmet in i if-satsen. 
 			try {
 			String name = _name.getText();
 			int items = Integer.parseInt(_items.getText());
-		    m1.addElement(new Customer(name,items)); 
-			_infoText.setText("Kund tillagd");
+		    m1.addElement(new Customer(name,items)); //Lägger ihop namn och antal varor i samma sträng genom toString som finns i Customer-klassen.
+			_infoText.setText("Kund tillagd");		 //Lägger sedan till den strängen till m1 som är en lista på kunder i affären
 			}
-		    catch (NumberFormatException ie) {
+		    catch (NumberFormatException ie) { //Fångar upp undantag om felaktig inmatning av heltal i _items textfältet.
 		    	
 		    	_infoText.setText("Felaktig inmatning av antal varor.");
 		    
 		    }
-			catch (Exception ye) {
+			catch (Exception ye) { //Fångar upp övriga fel som kan uppstå. (Inte kommit fram något så bara säkerhet)
 				
 				_infoText.setText("Inmatning felaktig.");
 				
@@ -170,12 +171,13 @@ public class StorePanel extends JPanel implements ActionListener{
 		
 		}
 		
-		else if (e.getSource() == _moveToLine1) {
+		else if (e.getSource() == _moveToLine1) { //går in i satsen om _moteToLine1 används.
 			
-			if(!m1.isEmpty()) {
+			if(!m1.isEmpty()) { //Kontrollerar om listan är tom, annars går den in.
 							
 				if(_inStoreList.getSelectedIndex() >= 0) {
 					
+					//Lägger till från listan till kön och tar bort elmentet från listan.
 					_queue1.enqueue(m1.elementAt(_inStoreList.getSelectedIndex()));
 					m1.remove(_inStoreList.getSelectedIndex());
 					_infoText.setText("Kund flyttad till kö 1");
@@ -194,12 +196,14 @@ public class StorePanel extends JPanel implements ActionListener{
 
 		}
 		
-		else if (e.getSource() == _moveToLine2) {
+		else if (e.getSource() == _moveToLine2) { //går in i satsen om _moteToLine1 används.
 			
+			//Kontrollerar om listan är tom, annars går den in.
 			if(!m1.isEmpty()) {
 				
 				if(_inStoreList.getSelectedIndex() >= 0) {
 				
+					//Lägger till från listan till kön och tar bort elmentet från listan.
 					_queue2.enqueue(m1.elementAt(_inStoreList.getSelectedIndex()));
 					m1.remove(_inStoreList.getSelectedIndex());
 					_infoText.setText("Kund flyttad till kö 1");
@@ -218,12 +222,13 @@ public class StorePanel extends JPanel implements ActionListener{
 			
 		}
 		
-		else if (e.getSource() == _serveQ1) {
+		else if (e.getSource() == _serveQ1) { //Aktiveras när kö 1 betjänas
 				
-			if(!_queue1.isEmpty()) {
+			if(!_queue1.isEmpty()) { //Kontrollera ratt kön inte är tom.
 				
-				_queue1.dequeue();
-				_infoText.setText("Kund i kö 1 betjänad");
+				//Tar bort kund ur kön
+				_infoText.setText("\"" + _queue1.dequeue() + "\"" + " är nu betjänad");
+				
 				
 			} else {
 				
@@ -233,12 +238,12 @@ public class StorePanel extends JPanel implements ActionListener{
 			
 		}
 		
-		else if (e.getSource() == _serveQ2) {
+		else if (e.getSource() == _serveQ2) { //Aktiveras när kö 2 betjänas
 			
-			if(!_queue2.isEmpty()) {
+			if(!_queue2.isEmpty()) { //Kontrollerar att kön inte är tom.
 				
-				_queue2.dequeue();
-				_infoText.setText("Kund i kö 2 betjänad");
+				//Tar bort kund ur kön
+				_infoText.setText("\"" + _queue2.dequeue() + "\"" + " är nu betjänad");
 				
 			} else {
 				
